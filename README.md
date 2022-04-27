@@ -27,7 +27,7 @@
 
 Файл Publications.xlsx - выгрузка из SciVal, по нужным авторам - необходимые поля: Scopus Author Ids, Year, Authors, Title, Scopus Source title, Issue, Volume, Pages, DOI, CiteScore (publication year)
 
-##Выходные данные
+## Выходные данные
 
 В папках conf и vak - скачанные страницы elibrary, по конференциям и публикациям ВАК каждого автора за последние 5 лет.
 

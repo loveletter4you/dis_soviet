@@ -8,6 +8,8 @@ import os
 from time import sleep
 import data
 from random import randint
+import lxml.html
+import lxml.html.clean
 
 class Article:
     def __init__(self, title, authors, source, year, value, citations, link, impact, doi):
@@ -102,7 +104,8 @@ class Scraper:
         try:  
             data = 'https://www.elibrary.ru' + td.find_all('a')[0]['href']
         except IndexError:
-            data = '-' 
+            data = '-'
+        print(data)
         return data
 
     @staticmethod
@@ -115,13 +118,10 @@ class Scraper:
     @staticmethod
     def _get_impact(soup) -> str:
         try:
-            r = requests.get(url, headers=d.headers)
-            soup = BeautifulSoup(r.content, 'lxml')
-            main_table = soup.find('div', {'style' : 'width:580px; margin:0; border:0; padding:0; '})
-            impact = main_table.find(text='  Импакт-фактор журнала в РИНЦ: ').parent.find('font').text
-            print(impact, url)
+            impact = soup.find(text='  Импакт-фактор журнала в РИНЦ: ').parent.find('font').text
         except:
             impact = '-'
+        print(impact)
         return impact
 
     @staticmethod
@@ -130,6 +130,7 @@ class Scraper:
             doi = soup.find(text='DOI: ').parent.find('font').text
         except:
             doi = '-'
+        print(doi)
         return doi
 
     def _parse_td_elements(self, tr: Tag):
